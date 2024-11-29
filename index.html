@@ -1,0 +1,157 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checador de Fatos</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .editor-note {
+      font-size: 0.8rem;
+      color: gray;
+    }
+    .section-title {
+      color: #007bff;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    .section-title a {
+      text-decoration: none;
+      color: #007bff;
+    }
+    .section-title a:hover {
+      text-decoration: underline;
+    }
+    .nav-buttons .btn {
+      min-width: 130px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-4">
+    <!-- Bitcoin Info -->
+    <div id="bitcoin-info" class="text-center my-4">
+      <h3>Valor do Bitcoin</h3>
+      <div id="loading" class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+      <p id="bitcoin-price" class="mt-3 d-none"></p>
+    </div>
+
+    <!-- Seções -->
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <h4 class="section-title">
+          <a href="pages/comentando_noticias.html">Comentando Notícias</a>
+        </h4>
+        <ul class="list-unstyled" id="noticias-list"></ul>
+      </div>
+      <div class="col-md-4 text-center">
+        <h4 class="section-title">
+          <a href="pages/refutando_midias.html">Refutando Mídia</a>
+        </h4>
+        <ul class="list-unstyled" id="refutando-list"></ul>
+      </div>
+      <div class="col-md-4 text-center">
+        <h4 class="section-title">
+          <a href="pages/checador_memes.html">Checador de Memes</a>
+        </h4>
+        <ul class="list-unstyled" id="checador-list"></ul>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Novas Seções -->
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <h4 class="section-title">
+          <a href="pages/projetos.html">Projetos</a>
+        </h4>
+        <ul class="list-unstyled" id="projetos-list"></ul>
+      </div>
+      <div class="col-md-4 text-center">
+        <h4 class="section-title">
+          <a href="pages/youtube.html">YouTube</a>
+        </h4>
+        <ul class="list-unstyled" id="youtube-list"></ul>
+      </div>
+      <div class="col-md-4 text-center">
+        <h4 class="section-title">
+          <a href="pages/links_uteis.html">Links Úteis</a>
+        </h4>
+        <ul class="list-unstyled" id="links-uteis-list"></ul>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Nota do Editor -->
+    <div class="text-center editor-note">
+      <p>
+        NOTA DO EDITOR:<br>
+        Todos os fatos apresentados aqui podem mudar radicalmente para falsos.<br>
+        Não nos responsabilizamos pelo seu fanatismo político.<br>
+        Qualquer reclamação deve ser dirigida para a porta mais próxima de ti, ela te escutará.
+      </p>
+    </div>
+
+    <!-- Botão de Sobre -->
+    <div class="text-center my-4">
+      <p>
+        <b>Sobre mim, o App e doações</b>
+      </p>
+      <a href="pages/sobre.html" class="btn btn-primary">Entrar em contato ou doar</a>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+    // Bitcoin Info
+    fetch("https://api.coindesk.com/v1/bpi/currentprice/BTC.json")
+      .then(response => response.json())
+      .then(data => {
+        const price = data.bpi.USD.rate;
+        document.getElementById("loading").classList.add("d-none");
+        const priceEl = document.getElementById("bitcoin-price");
+        priceEl.textContent = `$${price}`;
+        priceEl.classList.remove("d-none");
+      })
+      .catch(() => {
+        document.getElementById("loading").classList.add("d-none");
+        document.getElementById("bitcoin-price").textContent = "Erro ao carregar preço do Bitcoin.";
+      });
+
+    // Função para carregar artigos
+    function loadArticles(sectionId, url) {
+      fetch(url)
+        .then(response => response.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const articles = doc.querySelectorAll('#articles li a');
+          const list = document.getElementById(sectionId);
+          const latestArticles = Array.from(articles).slice(-2);
+
+          latestArticles.forEach(article => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${article.href}">${article.textContent}</a>`;
+            list.appendChild(li);
+          });
+        })
+        .catch(error => console.error('Erro ao carregar artigos:', error));
+    }
+
+    // Carregar os artigos das seções
+    loadArticles('noticias-list', 'pages/comentando_noticias.html');
+    loadArticles('refutando-list', 'pages/refutando_midias.html');
+    loadArticles('checador-list', 'pages/checador_memes.html');
+    loadArticles('projetos-list', 'pages/projetos.html');
+    loadArticles('youtube-list', 'pages/youtube.html');
+    loadArticles('links-uteis-list', 'pages/links_uteis.html');
+  </script>
+</body>
+</html>

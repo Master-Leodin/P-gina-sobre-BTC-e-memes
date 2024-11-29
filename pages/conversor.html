@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor de BTC</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <div class="container py-5">
+    <h1 class="text-center fw-bold mb-4">Conversor de Bitcoin</h1>
+    
+    <!-- Seleção de Moeda -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title fw-bold">Selecione a Moeda</h3>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="currency" id="currencyReal" value="real" checked />
+          <label class="form-check-label" for="currencyReal">Real (BRL)</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="currency" id="currencyUSD" value="usd" />
+          <label class="form-check-label" for="currencyUSD">Dólar (USD)</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="currency" id="currencyBTC" value="btc" />
+          <label class="form-check-label" for="currencyBTC">Bitcoin (BTC)</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campo de Entrada -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title fw-bold">Digite o Valor</h3>
+        <div class="mb-3">
+          <input type="number" class="form-control" id="inputValue" placeholder="Digite o valor para converter" />
+        </div>
+        <button id="convertButton" class="btn btn-primary w-100">Converter</button>
+      </div>
+    </div>
+
+    <!-- Resultados da Conversão -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title fw-bold">Resultados</h3>
+        <div id="results">
+          <p>Os resultados da conversão aparecerão aqui.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Atualizar Valores -->
+    <div class="text-center">
+      <button id="updateValues" class="btn btn-success">Atualizar valores BTC</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  ></script>
+
+  <!-- Script para Conversão -->
+  <script>
+    let btcValueUSD = 0;
+    let btcValueBRL = 0;
+
+    async function fetchBTCValues() {
+      try {
+        const response = await fetch(
+          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,brl'
+        );
+        const data = await response.json();
+        btcValueUSD = data.bitcoin.usd;
+        btcValueBRL = data.bitcoin.brl;
+        alert('Valores de BTC atualizados com sucesso!');
+      } catch (error) {
+        alert('Erro ao buscar valores: ' + error);
+      }
+    }
+
+    document.getElementById('convertButton').addEventListener('click', () => {
+      const inputValue = parseFloat(document.getElementById('inputValue').value);
+      const selectedCurrency = document.querySelector('input[name="currency"]:checked').value;
+
+      if (isNaN(inputValue) || inputValue <= 0) {
+        alert('Por favor, insira um valor válido.');
+        return;
+      }
+
+      let results = '';
+      if (selectedCurrency === 'real') {
+        const btc = inputValue / btcValueBRL;
+        const sats = btc * 100000000;
+        results = `
+          <p>Valor em Bitcoin: <strong>${btc.toFixed(8)} BTC</strong></p>
+          <p>Valor em Satoshis: <strong>${sats.toFixed(0)} sats</strong></p>
+        `;
+      } else if (selectedCurrency === 'usd') {
+        const btc = inputValue / btcValueUSD;
+        const sats = btc * 100000000;
+        results = `
+          <p>Valor em Bitcoin: <strong>${btc.toFixed(8)} BTC</strong></p>
+          <p>Valor em Satoshis: <strong>${sats.toFixed(0)} sats</strong></p>
+        `;
+      } else if (selectedCurrency === 'btc') {
+        const brl = inputValue * btcValueBRL;
+        const usd = inputValue * btcValueUSD;
+        results = `
+          <p>Valor em Reais: <strong>R$ ${brl.toFixed(2)}</strong></p>
+          <p>Valor em Dólares: <strong>$ ${usd.toFixed(2)}</strong></p>
+        `;
+      }
+
+      document.getElementById('results').innerHTML = results;
+    });
+
+    document.getElementById('updateValues').addEventListener('click', fetchBTCValues);
+
+    // Atualiza os valores ao carregar a página
+    fetchBTCValues();
+  </script>
+</body>
+</html>
