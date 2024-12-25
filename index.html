@@ -22,16 +22,17 @@
       color: gray;
     }
     .section-title {
-      color: #007bff;
+      color: #cde640;
       font-weight: bold;
       font-size: 1.5rem;
     }
     .section-title a {
       text-decoration: none;
-      color: #007bff;
+      color: #cde640;
     }
     .section-title a:hover {
       text-decoration: underline;
+      color: #b9da37;
     }
     .nav-buttons .btn {
       min-width: 130px;
@@ -93,14 +94,61 @@
     font-weight: bold; /* Aplica negrito */
   }
 
-  .section-title a {
-    font-size: 1.8rem; /* Garante que os links tenham o mesmo tamanho */
-    font-weight: bold; /* Negrito nos links */
-    text-decoration: none; /* Remove sublinhado */
+  div .section-title a {
+  color: #cde640; /* Define a cor do link */
+  font-size: 1.8rem; /* Garante o tamanho */
+  font-weight: bold; /* Aplica negrito */
+  text-decoration: none; /* Remove o sublinhado */
+}
+
+div .section-title a:hover {
+  text-decoration: underline; /* Adiciona sublinhado no hover */
+  color: #b9da37; /* Cor no hover */
+}
+.editor-note, .about-text {
+    color: white;
+  }
+    /* Estilo da animação */
+  .animated-button {
+    position: relative;
+    overflow: hidden;
   }
 
-  .section-title a:hover {
-    text-decoration: underline; /* Adiciona sublinhado no hover */
+  .animated-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(184, 134, 11, 0.3);
+    transform: skewX(-45deg);
+    z-index: 1;
+    transition: left 0.3s ease;
+  }
+
+  .animated-button:hover {
+    text-decoration: none;
+  }
+
+  .animated-button:hover::before {
+    background: rgba(255, 253, 253, 0.5);
+  }
+
+  .animated-button::before {
+    animation: slide 5s infinite linear;
+  }
+
+  @keyframes slide {
+    0% {
+      left: -100%;
+    }
+    50% {
+      left: 100%;
+    }
+    100% {
+      left: 200%;
+    }
   }
 </style>
 
@@ -188,23 +236,26 @@
 
     <hr class="my-4">
 
-    <!-- Nota do Editor -->
-    <div class="text-center editor-note">
-      <p>
-        NOTA DO EDITOR:<br>
-        Todos os fatos apresentados aqui podem mudar radicalmente para falsos.<br>
-        Não nos responsabilizamos pelo seu fanatismo político.<br>
-        Qualquer reclamação deve ser dirigida para a porta mais próxima de ti, ela te escutará.
-      </p>
-    </div>
+<!-- Nota do Editor -->
+<div class="text-center">
+  <p class="editor-note">
+    NOTA DO EDITOR:<br>
+    Todos os fatos apresentados aqui podem mudar radicalmente para falsos.<br>
+    Não nos responsabilizamos pelo seu fanatismo político.<br>
+    Qualquer reclamação deve ser dirigida para a porta mais próxima de ti, ela te escutará.
+  </p>
+</div>
 
-    <!-- Botão de Sobre -->
-    <div class="text-center my-4">
-      <p>
-        <b>Sobre mim, o App e doações</b>
-      </p>
-      <a href="pages/sobre.html" class="btn btn-primary">Entrar em contato ou doar</a>
-    </div>
+<!-- Botão de Sobre -->
+<div class="text-center my-4">
+  <p class="about-text">
+    <b>Sobre mim, o App e doações</b>
+  </p>
+
+  <!-- Botão com animação -->
+  <a href="pages/sobre.html" class="btn btn-primary btn-lg shadow animated-button">Entrar em contato ou doar</a>
+</div>
+
   </div>
 
   <!-- Bootstrap JS -->
