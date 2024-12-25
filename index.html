@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
@@ -87,6 +87,30 @@
 
     <hr class="my-4">
 
+      <!-- Novas Seções -->
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <h4 class="section-title">
+            <a href="pages/desenvolvimento.html">Desenvolvimento Pessoal</a>
+          </h4>
+          <ul class="list-unstyled" id="desenvolvimento-list"></ul>
+        </div>
+        <div class="col-md-4 text-center">
+          <h4 class="section-title">
+            <a href="pages/livros.html">Livros</a>
+          </h4>
+          <ul class="list-unstyled" id="livros-list"></ul>
+        </div>
+        <div class="col-md-4 text-center">
+          <h4 class="section-title">
+            <a href="pages/sobrevivencialismo.html">Sobrevivencialismo</a>
+          </h4>
+          <ul class="list-unstyled" id="sobrevivencialismo-list"></ul>
+        </div>
+      </div>
+
+    <hr class="my-4">
+
     <!-- Nota do Editor -->
     <div class="text-center editor-note">
       <p>
@@ -122,17 +146,25 @@
       })
       .catch(() => {
         document.getElementById("loading").classList.add("d-none");
-        document.getElementById("bitcoin-price").textContent = "Erro ao carregar preço do Bitcoin.";
+        const priceEl = document.getElementById("bitcoin-price");
+        priceEl.textContent = "Erro ao carregar preço do Bitcoin.";
+        priceEl.classList.remove("d-none");
       });
 
     // Função para carregar artigos
     function loadArticles(sectionId, url) {
-      fetch(url)
+      return fetch(url)
         .then(response => response.text())
         .then(html => {
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, 'text/html');
           const articles = doc.querySelectorAll('#articles li a');
+
+          if (!articles.length) {
+            console.warn(`Nenhum artigo encontrado em ${url}`);
+            return;
+          }
+
           const list = document.getElementById(sectionId);
           const latestArticles = Array.from(articles).slice(-2);
 
@@ -142,16 +174,25 @@
             list.appendChild(li);
           });
         })
-        .catch(error => console.error('Erro ao carregar artigos:', error));
+        .catch(error => console.error(`Erro ao carregar artigos de ${url}:`, error));
     }
 
-    // Carregar os artigos das seções
-    loadArticles('noticias-list', 'pages/comentando_noticias.html');
-    loadArticles('refutando-list', 'pages/refutando_midias.html');
-    loadArticles('checador-list', 'pages/checador_memes.html');
-    loadArticles('projetos-list', 'pages/projetos.html');
-    loadArticles('youtube-list', 'pages/youtube.html');
-    loadArticles('links-uteis-list', 'pages/links_uteis.html');
+    // Carregar todos os artigos em paralelo
+    const sections = [
+      { id: 'noticias-list', url: 'pages/comentando_noticias.html' },
+      { id: 'refutando-list', url: 'pages/refutando_midias.html' },
+      { id: 'checador-list', url: 'pages/checador_memes.html' },
+      { id: 'projetos-list', url: 'pages/projetos.html' },
+      { id: 'youtube-list', url: 'pages/youtube.html' },
+      { id: 'links-uteis-list', url: 'pages/links_uteis.html' },
+      { id: 'desenvolvimento-list', url: 'pages/desenvolvimento.html' },
+      { id: 'livros-list', url: 'pages/livros.html' },
+      { id: 'sobrevivencialismo-list', url: 'pages/sobrevivencialismo.html' }
+    ];
+
+    Promise.all(
+      sections.map(section => loadArticles(section.id, section.url))
+    ).catch(error => console.error('Erro ao carregar todas as seções:', error));
   </script>
 </body>
 </html>
