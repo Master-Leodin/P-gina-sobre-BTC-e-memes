@@ -63,7 +63,7 @@
     background: rgba(184, 134, 11, 0.3);
     transform: skewX(-45deg);
     z-index: 1;
-    transition: left 0.3s ease;
+    transition: left 0.1s ease;
   }
 
   .animated-button:hover {
@@ -90,53 +90,23 @@
     }
   }
   .section-title {
-    font-size: 1.8rem; /* Aumenta o tamanho da fonte */
-    font-weight: bold; /* Aplica negrito */
+    font-size: 1.8rem;
+    font-weight: bold;
   }
 
   div .section-title a {
-  color: #cde640; /* Define a cor do link */
-  font-size: 1.8rem; /* Garante o tamanho */
-  font-weight: bold; /* Aplica negrito */
-  text-decoration: none; /* Remove o sublinhado */
+  color: #cde640;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 div .section-title a:hover {
-  text-decoration: underline; /* Adiciona sublinhado no hover */
-  color: #b9da37; /* Cor no hover */
+  text-decoration: underline;
+  color: #b9da37;
 }
 .editor-note, .about-text {
     color: white;
-  }
-    /* Estilo da animação */
-  .animated-button {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .animated-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(184, 134, 11, 0.3);
-    transform: skewX(-45deg);
-    z-index: 1;
-    transition: left 0.3s ease;
-  }
-
-  .animated-button:hover {
-    text-decoration: none;
-  }
-
-  .animated-button:hover::before {
-    background: rgba(255, 253, 253, 0.5);
-  }
-
-  .animated-button::before {
-    animation: slide 5s infinite linear;
   }
 
   @keyframes slide {
@@ -151,8 +121,6 @@ div .section-title a:hover {
     }
   }
 </style>
-
-
 
 <div class="container my-4">
   <!-- Bitcoin Info -->
