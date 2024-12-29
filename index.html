@@ -24,14 +24,7 @@
     }
     h3, h4.section-title {
       color: #FFD700;
-    }
-    .section-title a {
-      color: #FFD700;
-      text-decoration: none;
-      transition: color 0.3s ease-in-out;
-    }
-    .section-title a:hover {
-      color: #FFA500;
+      transition: color 0.3s ease;
     }
     .btn-warning {
       background-color: #FF9900;
@@ -42,13 +35,6 @@
     }
     .btn-warning:hover {
       background-color: #cc7a00;
-    }
-    .btn-primary {
-      background-color: #1E90FF;
-      border: none;
-    }
-    .btn-primary:hover {
-      background-color: #1C86EE;
     }
     .card {
       background-color: rgba(255, 255, 255, 0.1);
@@ -62,41 +48,24 @@
       transform: scale(1.05);
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
     }
-    .card-title {
-      font-weight: bold;
+    .card:hover .section-title {
+      color: #ffe7a9; /* Altera a cor do texto ao passar o mouse */
+    }
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
     .editor-note {
       color: #bdbdbd;
       font-size: 0.9rem;
-    }
-    a.animated-button {
-      position: relative;
-      overflow: hidden;
-      display: inline-block;
-    }
-    a.animated-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      z-index: 0;
-      transition: left 0.3s ease;
-    }
-    a.animated-button:hover::before {
-      left: 0;
-    }
-    a.animated-button:hover {
-      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <div class="container mt-4">
     <div class="text-center mb-4">
-      <a href="pages/conversor.html" class="btn btn-warning btn-lg animated-button">Converter BTC</a>
+      <a href="pages/conversor.html" class="btn btn-warning btn-lg">Converter BTC</a>
     </div>
     <div id="bitcoin-info" class="text-center mb-4">
       <h3>Valor do Bitcoin</h3>
@@ -107,53 +76,71 @@
     </div>
     <div class="row">
       <div class="col-md-4 mb-3">
-        <div class="card p-3 text-center">
-          <h4 class="section-title"><a href="pages/comentando_noticias.html">Comentando Notícias</a></h4>
-        </div>
+        <a href="pages/comentando_noticias.html" class="card-link">
+          <div class="card p-3 text-center">
+            <h4 class="section-title">Comentando Notícias</h4>
+          </div>
+        </a>
       </div>
       <div class="col-md-4 mb-3">
-        <div class="card p-3 text-center">
-          <h4 class="section-title"><a href="pages/charges.html">Charges</a></h4>
-        </div>
+        <a href="pages/charges.html" class="card-link">
+          <div class="card p-3 text-center">
+            <h4 class="section-title">Charges</h4>
+          </div>
+        </a>
       </div>
       <div class="col-md-4 mb-3">
-        <div class="card p-3 text-center">
-          <h4 class="section-title"><a href="pages/checador_memes.html">Checador de Memes</a></h4>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 mb-3">
-        <div class="card p-3 text-center">
-          <h4 class="section-title"><a href="pages/youtube.html">YouTube & Podcast</a></h4>
-        </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <div class="card p-3 text-center">
-          <h4 class="section-title"><a href="pages/links_uteis.html">Links Úteis</a></h4>
-        </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <div class="card p-3 text-center">
-          <h4 class="section-title"><a href="pages/sobrevivencialismo.html">Sobrevivencialismo</a></h4>
-        </div>
+        <a href="pages/checador_memes.html" class="card-link">
+          <div class="card p-3 text-center">
+            <h4 class="section-title">Checador de Memes</h4>
+          </div>
+        </a>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4 mb-3">
-        <div class="card p-3 text-center">
-          <h4 class="section-title"><a href="pages/livros.html">Livros</a></h4>
-        </div>
+        <a href="pages/youtube.html" class="card-link">
+          <div class="card p-3 text-center">
+            <h4 class="section-title">YouTube & Podcast</h4>
+          </div>
+        </a>
       </div>
       <div class="col-md-4 mb-3">
-        <div class="card p-3 text-center">
-          <h4 class="section-title"><a href="pages/desenvolvimento.html">Desenvolvimento</a></h4>
-        </div>
+        <a href="pages/links_uteis.html" class="card-link">
+          <div class="card p-3 text-center">
+            <h4 class="section-title">Links Úteis</h4>
+          </div>
+        </a>
       </div>
       <div class="col-md-4 mb-3">
-        <div class="card p-3 text-center">
-          <h4 class="section-title"><a href="pages/projetos.html">Projetos</a></h4>
-        </div>
+        <a href="pages/sobrevivencialismo.html" class="card-link">
+          <div class="card p-3 text-center">
+            <h4 class="section-title">Sobrevivencialismo</h4>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <a href="pages/livros.html" class="card-link">
+          <div class="card p-3 text-center">
+            <h4 class="section-title">Livros</h4>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 mb-3">
+        <a href="pages/desenvolvimento.html" class="card-link">
+          <div class="card p-3 text-center">
+            <h4 class="section-title">Desenvolvimento</h4>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 mb-3">
+        <a href="pages/projetos.html" class="card-link">
+          <div class="card p-3 text-center">
+            <h4 class="section-title">Projetos</h4>
+          </div>
+        </a>
       </div>
     </div>
     <hr>
@@ -164,7 +151,7 @@
         Não nos responsabilizamos pelo seu fanatismo político.<br>
         Qualquer reclamação deve ser dirigida para a porta mais próxima de ti, ela te escutará.
       </p>
-      <a href="pages/sobre.html" class="btn btn-primary btn-lg animated-button">Entrar em contato ou doar</a>
+      <a href="pages/sobre.html" class="btn btn-primary btn-lg">Entrar em contato ou doar</a>
     </div>
   </div>
 
