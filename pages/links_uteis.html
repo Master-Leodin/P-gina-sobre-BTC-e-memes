@@ -18,7 +18,8 @@
 
     .link-card-container {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       margin: 20px 0;
     }
 
@@ -32,6 +33,7 @@
       align-items: center;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
     }
 
     .link-card:hover {
@@ -46,31 +48,87 @@
       margin-right: 15px;
     }
 
-    .link-card a {
-      text-decoration: none;
-      color: #00adb5;
+    .link-card span {
+      color: #b5ac00;
       font-size: 1.2rem;
       font-weight: bold;
     }
 
-    .link-card a:hover {
-      color: #008891;
-      text-decoration: underline;
+    .additional-card {
+      display: none;
+      background-color: #1f1f1fa5;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 10px;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
     }
   </style>
 </head>
 <body>
   <div class="container my-5">
     <h1 class="text-center mb-4">Links Úteis</h1>
+    
+
     <div class="link-card-container">
-      <div class="link-card">
-        <img src="../assets/btcblue.jpg" alt="Bitcoin BluePill">
-        <a href="https://t.me/bitcoin_blackpill" target="_blank">₿itcoin: BluePill</a>
+      <div class="link-card" onclick="toggleAdditionalCard(this)">
+        <img src="../assets/btcblue.jpg" alt="Bitcoin">
+        <span>₿itcoin: BluePill</span>
+      </div>
+      <div class="additional-card">
+        <p>Welcome to ₿itcoin BlackPill Fork.<br>Aqui você encontrará só os melhores empurradores de mouse 
+        entusiastas do BTC que melhor tiram as dúvidas das pessoas</p>
+        <a href="https://t.me/bitcoin_blackpill" target="_blank">Entrar no grupo</a>
       </div>
     </div>
+    
+    <div class="link-card-container">
+      <div class="link-card" onclick="toggleAdditionalCard(this)">
+        <img src="../assets/ooz.jpg" alt="Bitcoin">
+        <span>OOZARU1523</span>
+      </div>
+      <div class="additional-card">
+        <p>BTC - PROIBIDO Shitcoins</p>
+        <a href="https://t.me/OOZARU1523" target="_blank">Entrar no grupo</a>
+      </div>
+    </div>
+    
+    <div class="link-card-container">
+      <div class="link-card" onclick="toggleAdditionalCard(this)">
+        <img src="../assets/refug.jpg" alt="Bitcoin">
+        <span>⚜️Refúgio Intelectual⚜️</span>
+      </div>
+      <div class="additional-card">
+        <p>Grupo de estudos diversos</p>
+        <a href="https://t.me/+n7ezPSEuiodmZjEx" target="_blank">Entrar no grupo</a>
+      </div>
+    </div>
+
+    <div class="link-card-container">
+      <div class="link-card" onclick="toggleAdditionalCard(this)">
+        <img src="../assets/traderwar.png" alt="Bitcoin">
+        <span>Traders Warroom</span>
+      </div>
+      <div class="additional-card">
+        <p>Grupo de Analise Técnica Gratuito focado em BTC</p>
+        <a href="https://t.me/traders_warroom" target="_blank">Entrar no grupo</a>
+      </div>
+    </div>
+
   </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function toggleAdditionalCard(cardElement) {
+      const additionalCard = cardElement.nextElementSibling;
+      if (additionalCard.style.display === 'none' || !additionalCard.style.display) {
+        additionalCard.style.display = 'block';
+      } else {
+        additionalCard.style.display = 'none';
+      }
+    }
+  </script>
 </body>
 </html>
