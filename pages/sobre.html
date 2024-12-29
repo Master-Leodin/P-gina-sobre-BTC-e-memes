@@ -13,6 +13,51 @@
       background-repeat: no-repeat; /* Evita repetição */
       background-attachment: fixed; /* Fixa a imagem durante o scroll */
     }
+    .top-left-button {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.top-left-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(192, 192, 192, 0.5);
+  z-index: 0;
+  transform: skewX(-45deg);
+  animation: shimmer 5s linear infinite;
+}
+
+.top-left-button:hover::before {
+  left: 0;
+}
+
+.top-left-button:hover {
+  text-decoration: none;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 2000%;
+  }
+}
+
   </style>  
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -20,6 +65,7 @@
   />
 </head>
 <body>
+  <a href="../index.html" class="top-left-button">Início</a>
   <style>
     .card {
       background-color: #ffaa00b4;

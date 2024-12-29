@@ -65,20 +65,60 @@
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
     }
 
-  .top-right-button {
+    .top-left-button {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 5px;
+      left: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      overflow: hidden;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .top-left-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(192, 192, 192, 0.5);
+      z-index: 0;
+      transform: skewX(-45deg);
+    }
+
+    .top-left-button:hover::before {
+      left: 0;
+    }
+
+    .top-left-button:hover {
+      text-decoration: none;
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 2000%;
+      }
+    }
+
+    .top-left-button::before {
+      animation: shimmer 5s linear infinite;
     }
   </style>
 </head>
 <body>
-  <a href="../index.html" class="btn btn-sm btn-primary top-left-button">Início</a>
+  <a href="../index.html" class="top-left-button">Início</a>
 
   <div class="container my-5">
     <h1 class="text-center mb-4">Links Úteis</h1>
-    
-
     <div class="link-card-container">
       <div class="link-card" onclick="toggleAdditionalCard(this)">
         <img src="../assets/btcblue.jpg" alt="Bitcoin">
@@ -131,11 +171,10 @@
   <script>
     function toggleAdditionalCard(cardElement) {
       const additionalCard = cardElement.nextElementSibling;
-      if (additionalCard.style.display === 'none' || !additionalCard.style.display) {
-        additionalCard.style.display = 'block';
-      } else {
-        additionalCard.style.display = 'none';
-      }
+      additionalCard.style.display = 
+        additionalCard.style.display === 'none' || !additionalCard.style.display
+          ? 'block'
+          : 'none';
     }
   </script>
 </body>
