@@ -4,14 +4,135 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sobravivencialismo</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<a href="../index.html" class="top-left-button">Início</a>
+<style>
+  .top-left-button {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.top-left-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(192, 192, 192, 0.5);
+  z-index: 0;
+  transform: skewX(-45deg);
+  animation: shimmer 5s linear infinite;
+}
+
+.top-left-button:hover::before {
+  left: 0;
+}
+
+.top-left-button:hover {
+  text-decoration: none;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 2000%;
+  }
+}
+
+  body {
+    background-image: url('../assets/btc003.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+  }
+  .container {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 80px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  h3, h4.section-title {
+    color: #FFD700;
+    transition: color 0.3s ease;
+  }
+  .btn-warning {
+    background-color: #FF9900;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  .btn-warning:hover {
+    background-color: #cc7a00;
+  }
+  .card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #FFD700;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+  }
+  .card:hover .section-title {
+    color: #ffe7a9;
+  }
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .editor-note {
+    color: #bdbdbd;
+    font-size: 0.9rem;
+  }
+</style>
 </head>
 <body>
-  <h1>Sobravivencialismo</h1>
-  <ul id="articles">
-    <li><a href="sob1.html">Título de sob 1</a></li>
-    <li><a href="sob2.html">Título de sob 2</a></li>
-    <li><a href="sob3.html">Título de sob 3</a></li>
-    <!-- Adicione mais notícias conforme necessário -->
-  </ul>
-</body>
-</html>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <a href="pages/comentando_noticias.html" class="card-link">
+        <div class="card p-3 text-center">
+          <h4 class="section-title">Mantimentos</h4>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4 mb-3">
+      <a href="pages/charges.html" class="card-link">
+        <div class="card p-3 text-center">
+          <h4 class="section-title">Proteção</h4>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4 mb-3">
+      <a href="pages/checador_memes.html" class="card-link">
+        <div class="card p-3 text-center">
+          <h4 class="section-title">Estratégias</h4>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
